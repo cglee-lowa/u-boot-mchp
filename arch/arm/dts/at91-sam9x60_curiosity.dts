@@ -21,7 +21,7 @@
 	};
 
 	memory {
-		reg = <0x20000000 0x8000000>;
+		reg = <0x20000000 0x4000000>;
 	};
 
 	clocks {
@@ -35,6 +35,7 @@
 	};
 
 	gpio-keys {
+		status = "disabled";
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_key_gpio_default>;
@@ -44,10 +45,12 @@
 			gpios = <&pioA 29 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_PROG1>;
 			wakeup-source;
+			status = "disabled";
 		};
 	};
 
 	leds {
+		status = "disabled";
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_leds>;
@@ -55,17 +58,20 @@
 		led-red {
 			label = "red";
 			gpios = <&pioD 17 GPIO_ACTIVE_HIGH>;
+			status = "disabled";
 		};
 
 		led-green {
 			label = "green";
 			gpios = <&pioD 19 GPIO_ACTIVE_HIGH>;
+			status = "disabled";
 		};
 
 		led-blue {
 			label = "blue";
 			gpios = <&pioD 21 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "heartbeat";
+			status = "disabled";
 		};
 	};
 
@@ -73,11 +79,11 @@
 		gpios = <&pioD 14 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_onewire_tm_default>;
-		status = "okay";
+		status = "disabled";
 
 		w1_eeprom: w1_eeprom@0 {
 			compatible = "maxim,ds24b33";
-			status = "okay";
+			status = "disabled";
 		};
 	};
 };
@@ -90,12 +96,12 @@
 &ebi {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ebi_addr_nand &pinctrl_ebi_data_0_7>;
-	status = "okay";
+	status = "disabled";
 
 	nand_controller: nand-controller {
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_nand_oe_we &pinctrl_nand_cs &pinctrl_nand_rb>;
-		status = "okay";
+		status = "disabled";
 
 		nand@3 {
 			reg = <0x3 0x0 0x800000>;
@@ -155,7 +161,7 @@
 
 &flx0 {
 	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-	status = "okay";
+	status = "disabled";
 
 	i2c@600 {
 		compatible = "microchip,sam9x60-i2c";
@@ -165,12 +171,13 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		clocks = <&pmc PMC_TYPE_PERIPHERAL 5>;
-		status = "okay";
+		status = "disabled";
 
 		eeprom@53 {
 			compatible = "atmel,24c02";
 			reg = <0x53>;
 			pagesize = <16>;
+			status = "disabled";
 		};
 	};
 };
@@ -179,7 +186,7 @@
 	phy-mode = "rmii";
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_macb0_rmii>;
-	status = "okay";
+	status = "disabled";
 };
 
 &pinctrl {
@@ -318,6 +325,7 @@
 &sdhci1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdhci1>;
+	status = "disabled";
 };
 
 &usb1 {
